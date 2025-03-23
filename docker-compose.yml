@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cv-assistant-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+      - ./chroma_db:/app/chroma_db
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - BEDROCK_MODEL_ID=${BEDROCK_MODEL_ID}
+      - BEDROCK_EMBEDDING_MODEL=${BEDROCK_EMBEDDING_MODEL}
+      - USE_OPENAI=${USE_OPENAI}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL}
